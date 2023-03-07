@@ -6,6 +6,8 @@ package main;
 
 import classes.*;
 import java.io.IOException;
+import java.util.Date;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -14,14 +16,32 @@ import java.util.logging.Logger;
  * @author migu_
  */
 public class frmMain extends javax.swing.JFrame {
-    
-    DataTracker rastreador = new DataTracker("guatemala");
-
+   
+    DataTracker rastreador = new DataTracker("guatemala"); //conecta a la api
+    Country pais=new Country();//obejrto que vamos utilizar
     /**
      * Creates new form frmMain
      */
+    
+    public void obtenerFecha()
+    {   
+        try {
+            rastreador.descargarDatos();
+        } catch (IOException ex) {
+            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InterruptedException ex) {
+            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        rastreador.getCountries();
+        pais= rastreador.getCountries().get(0);
+       System.out.println(pais.toString());
+       lblFechaPrimerCaso.setText(pais.toString());
+       Date fecha=new Date();
+       
+    }
     public frmMain() {
         initComponents();
+        
     }
 
     /**
@@ -46,6 +66,12 @@ public class frmMain extends javax.swing.JFrame {
         jLabel1.setText("¿Cuándo se reportó el 1er caso de Covid-19?");
 
         jLabel2.setText("Ingrese el nombre del país:");
+
+        txtPais.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtPaisActionPerformed(evt);
+            }
+        });
 
         btnObtenerFecha.setText("Obtener fecha");
         btnObtenerFecha.addActionListener(new java.awt.event.ActionListener() {
@@ -104,14 +130,13 @@ public class frmMain extends javax.swing.JFrame {
 
     private void btnObtenerFechaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnObtenerFechaActionPerformed
         // TODO add your handling code here:
-        try {
-            rastreador.descargarDatos();
-        } catch (IOException ex) {
-            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InterruptedException ex) {
-            Logger.getLogger(frmMain.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        obtenerFecha();
+    
     }//GEN-LAST:event_btnObtenerFechaActionPerformed
+
+    private void txtPaisActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtPaisActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtPaisActionPerformed
 
     /**
      * @param args the command line arguments

@@ -17,10 +17,28 @@ public class Country {
     private String country;
     @JsonProperty("CountryCode")
     private String country_code;
+    @JsonProperty("Date")
+    private String date;
     @JsonProperty("Cases")
     private int cases;
         
     public Country() {
+    }
+
+    public String getCountry_code() {
+        return country_code;
+    }
+
+    public void setCountry_code(String country_code) {
+        this.country_code = country_code;
+    }
+
+    public String getDate() {
+        return date;
+    }
+
+    public void setDate(String date) {
+        this.date = date;
     }
 
     public String getCountry() {
@@ -47,8 +65,9 @@ public class Country {
         this.cases = cases;
     }
         
+    
     @Override
     public String toString() {
-        return String.valueOf(cases) + " en " + country + " el ";
+        return  date;
     }
 }

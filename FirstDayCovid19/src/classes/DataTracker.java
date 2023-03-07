@@ -44,6 +44,7 @@ public class DataTracker {
         // obtener listado de datos del país
         datos = mapper.readValue(response.body(), new TypeReference<List<Country>>() {});
         System.out.println("¡Datos descargados!");
+   
     }
 
     public List<Country> getCountries() {
